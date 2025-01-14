@@ -345,25 +345,23 @@ body {
     color: #45a29e;
 }
 
+.projects-section {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #fff;
+}
 
+.projects-section h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
 
-        .projects-section {
-            text-align: center;
-            padding: 50px 20px;
-            background-color: #fff;
-        }
-
-        .projects-section h1 {
-            font-size: 2.5rem;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .projects-section p {
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 40px;
-        }
+.projects-section p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 40px;
+}
 
         .project {
             display: flex;
