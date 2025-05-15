@@ -1,0 +1,590 @@
+/* Reset e Configurações Gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-black: #000000;
+    --color-dark: #0c0c0c;
+    --color-turquoise: #9e0000;
+    --color-white: #ffffff;
+    --color-gray: #a9a9a9;
+    --color-dark-gray: #333333;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', 'Roboto', sans-serif;
+    background-color: var(--color-dark);
+    color: var(--color-white);
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 700;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-white);
+    transition: color 0.3s ease;
+}
+
+.highlight {
+    color: var(--color-white);
+}
+
+.dot {
+    color: var(--color-turquoise);
+}
+
+/* Header e Navegação */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+header.scrolled {
+    background-color: rgba(0, 0, 0, 0.9);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo h2 {
+    font-size: 1.8rem;
+    margin-right: 5px;
+}
+
+.dev-text {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1rem;
+    color: var(--color-gray);
+}
+
+.dev-text2 {
+    margin-top: 100px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1rem;
+    color: var(--color-gray);
+}
+
+.menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.menu a {
+    position: relative;
+    font-size: 1rem;
+}
+
+.menu a:hover {
+    color: var(--color-turquoise);
+}
+
+.menu a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--color-turquoise);
+    transition: width 0.3s ease;
+}
+
+.menu a:hover::after {
+    width: 100%;
+}
+
+.btn-outline {
+    border: 1px solid var(--color-turquoise);
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    color: var(--color-turquoise);
+    transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+    background-color: var(--color-turquoise);
+    color: var(--color-dark);
+}
+
+.btn-solid {
+    display: inline-block;
+    background-color: transparent;
+    border: 1px solid var(--color-turquoise);
+    padding: 0.8rem 2rem;
+    border-radius: 4px;
+    color: var(--color-turquoise);
+    font-weight: 500;
+    margin-top: 2rem;
+    transition: all 0.3s ease;
+}
+
+.btn-solid:hover {
+    background-color: var(--color-turquoise);
+    color: var(--color-dark);
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+    min-height: 100vh;
+    padding: 8rem 8rem 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.hero-content {
+    max-width: 600px;
+    padding-right: 2rem;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--color-gray);
+}
+
+.hero-image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px 20px 0 20px;
+    z-index: 1;
+    position: relative;
+}
+
+.image-border {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px 20px 0 20px;
+    border: 2px solid var(--color-turquoise);
+    z-index: 0;
+}
+
+/* Sobre Mim */
+.sobre {
+    padding: 6rem 8rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.sobre h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.sobre-content p {
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+}
+
+/* Skills Sections */
+.skills-section {
+    margin-top: 6rem;
+}
+
+.skills-header {
+    margin-bottom: 3rem;
+    max-width: 800px;
+}
+
+.skills-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.skills-description {
+    font-size: 1.2rem;
+    color: var(--color-gray);
+    margin-bottom: 1.5rem;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.skill-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    height: 180px;
+    margin-bottom: 1rem;
+}
+
+.skill-icon i {
+    font-size: 64px;
+}
+
+.skill-item p {
+    font-size: 0.9rem;
+    color: var(--color-gray);
+}
+
+/* Soft Skills */
+.soft-skills {
+    padding: 6rem 8rem;
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.bulb-icon {
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    color: var(--color-turquoise);
+}
+
+.soft-skills-container {
+    display: flex;
+    justify-content: center;
+    gap: 6rem;
+    margin-top: 4rem;
+}
+
+.soft-skills-list {
+    width: 40%;
+}
+
+.soft-skill-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.soft-skill-item .skill-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 1.5rem;
+    margin-bottom: 0;
+}
+
+.soft-skill-item .skill-icon i {
+    font-size: 1.5rem;
+}
+
+.soft-skill-item p {
+    font-size: 1.1rem;
+}
+
+.soft-skills-content {
+    width: 60%;
+    text-align: right;
+}
+
+.soft-skills-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.soft-skills-subtitle {
+    font-size: 1.2rem;
+    color: var(--color-gray);
+    margin-bottom: 1.5rem;
+}
+
+/* Projetos */
+.projetos {
+    padding: 6rem 8rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.projetos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.projetos-header h2 {
+    font-size: 2.5rem;
+}
+
+.ver-mais {
+    color: var(--color-gray);
+    transition: color 0.3s ease;
+}
+
+.ver-mais:hover {
+    color: var(--color-turquoise);
+}
+
+.projetos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.projeto-card {
+    background-color: var(--color-black);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.projeto-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.projeto-image img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s ease;
+}
+
+.projeto-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.projeto-card:hover .projeto-overlay {
+    opacity: 1;
+}
+
+.projeto-card:hover .projeto-image img {
+    transform: scale(1.05);
+}
+
+.ver-projeto {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-white);
+    transition: color 0.3s ease;
+}
+
+.ver-projeto:hover {
+    color: var(--color-turquoise);
+}
+
+.projeto-info {
+    padding: 1.5rem;
+}
+
+.projeto-info h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.projeto-info p {
+    color: var(--color-gray);
+    font-size: 0.9rem;
+}
+
+/* Footer / Contato */
+footer {
+    padding: 4rem 8rem;
+    text-align: center;
+    border-top: 1px solid var(--color-dark-gray);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+footer h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--color-black);
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    color: var(--color-turquoise);
+    transform: translateY(-5px);
+}
+
+/* Responsividade */
+@media screen and (max-width: 1024px) {
+    header {
+        padding: 1.2rem 2rem;
+    }
+
+    .hero, .sobre, .soft-skills, .projetos {
+        padding: 6rem 4rem 4rem;
+    }
+
+    .hero {
+        flex-direction: column;
+        gap: 4rem;
+        text-align: center;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        padding-right: 0;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .soft-skills-container {
+        flex-direction: column;
+    }
+
+    .soft-skills-list, .soft-skills-content {
+        width: 100%;
+    }
+
+    .soft-skills-content {
+        text-align: left;
+    }
+
+    .projetos-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .menu {
+        display: none;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-content, .hero-image, .sobre-content, .skills-header, .skill-item, 
+.soft-skill-item, .soft-skills-content, .projeto-card {
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.skill-item:nth-child(2), .soft-skill-item:nth-child(2), .projeto-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.skill-item:nth-child(3), .soft-skill-item:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.skill-item:nth-child(4), .soft-skill-item:nth-child(4) {
+    animation-delay: 0.6s;
+}
+
+.skill-item:nth-child(5), .soft-skill-item:nth-child(5) {
+    animation-delay: 0.8s;
+}
+
+.skill-item:nth-child(6) {
+    animation-delay: 1s;
+}
+
+.skill-item:nth-child(7) {
+    animation-delay: 1.2s;
+}
+
+.skill-item:nth-child(8) {
+    animation-delay: 1.4s;
+}
+
+#btnTopo {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #666;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    display: none;
+    transition: all 0.3s ease;
+  }
+  
+  #btnTopo:hover {
+    background-color: #555;
+  }
+  
+  
