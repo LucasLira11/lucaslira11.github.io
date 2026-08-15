@@ -1,19 +1,15 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Monitor, Database, Smartphone, ExternalLink, Cloud } from 'lucide-react';
+import { Monitor, Database, Smartphone, ExternalLink, Cloud, Award, ArrowRight } from 'lucide-react';
 import { FiGithub, FiLinkedin } from "react-icons/fi";
 import Link from "next/link";
 import Logo from "@/components/Logo";
-import {
-  personalInfo,
-  skills,
-  projects,
-  certifications,
-} from "@/data/portfolioData";
-import { Award, ArrowRight } from "lucide-react";
 import Image from "next/image";
-import { institutionLogos } from "@/data/portfolioData";
+
+// Importando a nova estrutura bilíngue e as logos
+import { portfolioData, institutionLogos } from "@/data/portfolioData";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -22,35 +18,98 @@ const fadeUp = {
 
 const iconMap = { Monitor, Database, Smartphone, Cloud };
 
+// Dicionário para os textos estáticos da interface
+const uiStrings = {
+  pt: {
+    nav: { about: "Sobre", skills: "Skills", certs: "Certificações", projects: "Projetos", contact: "Contato" },
+    hero: { devAt: "WEB DEVELOPER @ TURINQ", creating: "Criando", facilities: "facilidades.", portfolioBtn: "Ver Portfólio" },
+    about: {
+      sectionNum: "01.",
+      title: "Sobre Mim",
+      p1_1: "Sou o ", p1_name: "Lucas Lira", p1_2: ", desenvolvedor apaixonado por transformar problemas complexos em interfaces fluidas e intuitivas.",
+      p2_1: "Com experiência na ", p2_company: "Turinq", p2_2: ", aprendi que o segredo de um projeto perfeito está no equilíbrio entre uma arquitetura backend sólida e um frontend que respira design.",
+      p3_1: "Atualmente foco-me em aprofundar o meu conhecimento no sistema ", p3_highlight: "ArcGIS e em GeoTecnologia", p3_2: " em geral, explorando também o mundo dos sistemas inteligentes e mobile."
+    },
+    skills: { sectionNum: "02.", title: "Habilidades Técnicas" },
+    certs: { sectionNum: "03.", title: "Certificações & Conquistas", subtitle: "Um resumo do que já estudei e validei ao longo do caminho.", viewAll: "Ver todas as certificações" },
+    projects: { sectionNum: "04.", title: "Tudo o que já construí", devBadge: "Em Desenvolvimento", detailsBtn: "VER DETALHES", viewAllBtn: "VER TODOS OS PROJETOS" },
+    contact: { title1: "Vamos construir algo ", titleHighlight: "juntos?", subtitle: "Estou disponível para novos projetos e colaborações.", cta: "ENTRAR EM CONTATO" },
+    langBtn: "EN 🇺🇸",
+    footer: "Desenvolvido com Next.js"
+  },
+  en: {
+    nav: { about: "About", skills: "Skills", certs: "Certifications", projects: "Projects", contact: "Contact" },
+    hero: { devAt: "WEB DEVELOPER @ TURINQ", creating: "Creating", facilities: "solutions.", portfolioBtn: "View Portfolio" },
+    about: {
+      sectionNum: "01.",
+      title: "About Me",
+      p1_1: "I'm ", p1_name: "Lucas Lira", p1_2: ", a developer passionate about transforming complex problems into fluid and intuitive interfaces.",
+      p2_1: "With experience at ", p2_company: "Turinq", p2_2: ", I've learned that the secret to a perfect project lies in the balance between a solid backend architecture and a frontend that breathes design.",
+      p3_1: "I am currently focusing on deepening my knowledge in the ", p3_highlight: "ArcGIS system and GeoTechnology", p3_2: " in general, also exploring the world of intelligent and mobile systems."
+    },
+    skills: { sectionNum: "02.", title: "Technical Skills" },
+    certs: { sectionNum: "03.", title: "Certifications & Achievements", subtitle: "A summary of what I've studied and validated along the way.", viewAll: "View all certifications" },
+    projects: { sectionNum: "04.", title: "Everything I've built", devBadge: "In Development", detailsBtn: "VIEW DETAILS", viewAllBtn: "VIEW ALL PROJECTS" },
+    contact: { title1: "Let's build something ", titleHighlight: "together?", subtitle: "I am available for new projects and collaborations.", cta: "GET IN TOUCH" },
+    langBtn: "PT 🇧🇷",
+    footer: "Developed with Next.js"
+  }
+};
+
 export default function Home() {
+  // Estado para controlar o idioma selecionado (pt ou en)
+  const [lang, setLang] = useState<'pt' | 'en'>('pt');
+  useEffect(() => {
+    const savedLang = localStorage.getItem('portfolio_lang');
+    if (savedLang === 'pt' || savedLang === 'en') {
+      setLang(savedLang);
+    }
+  }, []);
+
+  // Dados dinâmicos baseados no idioma
+  const { personalInfo, skills, certifications, projects } = portfolioData[lang];
+  // Textos estáticos baseados no idioma
+  const ui = uiStrings[lang];
+
   return (
     <div className="bg-neutral-950 text-white min-h-screen selection:bg-red-600 selection:text-white">
       {/* Navbar */}
       <nav className="fixed w-full z-50 backdrop-blur-md bg-neutral-950/80 border-b border-neutral-900">
         <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
           <Logo />
-          <div className="hidden md:flex gap-8 text-sm font-medium text-neutral-400">
-            <a href="#sobre" className="hover:text-red-500 transition-colors">
-              Sobre
-            </a>
-            <a href="#skills" className="hover:text-red-500 transition-colors">
-              Skills
-            </a>
-            <a
-              href="#certificacoes"
-              className="hover:text-red-500 transition-colors"
+
+          <div className="flex items-center gap-8">
+            <div className="hidden md:flex gap-8 text-sm font-medium text-neutral-400">
+              <a href="#sobre" className="hover:text-red-500 transition-colors">
+                {ui.nav.about}
+              </a>
+              <a href="#skills" className="hover:text-red-500 transition-colors">
+                {ui.nav.skills}
+              </a>
+              <a href="#certificacoes" className="hover:text-red-500 transition-colors">
+                {ui.nav.certs}
+              </a>
+              <a href="#projetos" className="hover:text-red-500 transition-colors">
+                {ui.nav.projects}
+              </a>
+              <a href="#contato" className="hover:text-red-500 transition-colors">
+                {ui.nav.contact}
+              </a>
+            </div>
+
+            {/* Botão de Idioma Neon */}
+            <button
+              onClick={() => {
+                const newLang = lang === 'pt' ? 'en' : 'pt';
+                setLang(newLang);
+                localStorage.setItem('portfolio_lang', newLang); // Salva a escolha!
+              }}
+
+              className="shadow-[0_0_12px_rgba(239,68,68,0.5)] text-red-500 border border-red-500/50 rounded-full px-4 py-1.5 text-sm font-bold hover:bg-red-600 hover:text-white hover:shadow-[0_0_20px_rgba(239,68,68,0.8)] transition-all animate-pulse hover:animate-none ml-4"
+              aria-label="Mudar idioma"
             >
-              Certificações
-            </a>
-            <a
-              href="#projetos"
-              className="hover:text-red-500 transition-colors"
-            >
-              Projetos
-            </a>
-            <a href="#contato" className="hover:text-red-500 transition-colors">
-              Contato
-            </a>
+              {ui.langBtn}
+            </button>
           </div>
         </div>
       </nav>
@@ -59,12 +118,12 @@ export default function Home() {
         {/* HERO */}
         <section className="pt-40 pb-20 px-6 max-w-6xl mx-auto min-h-[90vh] flex flex-col justify-center">
           <motion.div initial="hidden" animate="visible" variants={fadeUp}>
-            <p className="text-red-600 font-mono mb-4 text-lg font-semibold tracking-widest">
-              WEB DEVELOPER @ TURINQ
+            <p className="text-red-600 font-mono mb-4 text-lg font-semibold tracking-widest uppercase">
+              {ui.hero.devAt}
             </p>
             <h1 className="text-6xl md:text-8xl font-bold tracking-tighter mb-6 leading-tight">
-              Criando <br />{" "}
-              <span className="text-neutral-500 italic">facilidades.</span>
+              {ui.hero.creating} <br />{" "}
+              <span className="text-neutral-500 italic">{ui.hero.facilities}</span>
             </h1>
             <p className="text-neutral-400 text-xl max-w-2xl mb-10 leading-relaxed">
               {personalInfo.about}
@@ -74,18 +133,21 @@ export default function Home() {
                 href="#projetos"
                 className="bg-red-600 hover:bg-red-700 px-10 py-4 rounded-full font-bold transition-all hover:scale-105 shadow-xl shadow-red-600/20"
               >
-                Ver Portfólio
+                {ui.hero.portfolioBtn}
               </a>
               <div className="flex gap-6 text-neutral-400">
                 <a
                   href="https://github.com/lucaslira11"
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="hover:text-red-600 transition-colors"
                 >
                   <FiGithub size={28} />
                 </a>
                 <a
                   href="https://www.linkedin.com/in/lucas-lira-79b339272/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hover:text-red-600 transition-colors"
                 >
                   <FiLinkedin size={28} />
@@ -108,36 +170,33 @@ export default function Home() {
               variants={fadeUp}
             >
               <h2 className="text-3xl font-bold mb-8 flex items-center gap-4">
-                <span className="text-red-600 font-mono text-xl">01.</span>{" "}
-                Sobre Mim
+                <span className="text-red-600 font-mono text-xl">{ui.about.sectionNum}</span>{" "}
+                {ui.about.title}
               </h2>
               <div className="space-y-6 text-neutral-400 text-lg leading-relaxed">
                 <p>
-                  Sou o{" "}
-                  <span className="text-white font-medium">Lucas Lira</span>,
-                  desenvolvedor apaixonado por transformar problemas complexos
-                  em interfaces fluidas e intuitivas.
+                  {ui.about.p1_1}
+                  <span className="text-white font-medium">{ui.about.p1_name}</span>
+                  {ui.about.p1_2}
                 </p>
                 <p>
-                  Com experiência na{" "}
-                  <span className="text-red-500">Turinq</span>, aprendi que o
-                  segredo de um projeto perfeito está no equilíbrio entre uma
-                  arquitetura backend sólida e um frontend que respira design.
+                  {ui.about.p2_1}
+                  <span className="text-red-500">{ui.about.p2_company}</span>
+                  {ui.about.p2_2}
                 </p>
                 <p>
-                  Atualmente foco-me em aprofundar o meu conhecimento no sistema{" "}
+                  {ui.about.p3_1}
                   <span className="text-white italic">
-                    ArcGIS e em GeoTecnologia
+                    {ui.about.p3_highlight}
                   </span>{" "}
-                  em geral, explorando também o mundo dos sistemas inteligentes
-                  e mobile.
+                  {ui.about.p3_2}
                 </p>
               </div>
             </motion.div>
 
-            {/* Imagem com Hover a Preto e Branco, Redimensionada e com Zoom */}
+            {/* Imagem com Hover a Preto e Branco */}
             <div className="relative group flex justify-center">
-              <div className="absolute inset-0 border-2 border-red-600 rounded-3xl translate-x-25 translate-y-4 transition-transform duration-500 w-full h-full max-w-[280px]"></div>
+              <div className="absolute inset-0 border-2 border-red-600 rounded-3xl translate-x-4 md:translate-x-10 translate-y-4 transition-transform duration-500 w-full h-full max-w-[280px]"></div>
               <div className="relative aspect-square bg-neutral-900 rounded-3xl overflow-hidden border border-neutral-800 w-full max-w-[280px]">
                 <Image
                   src="/fotoperfil.png"
@@ -162,8 +221,8 @@ export default function Home() {
             variants={fadeUp}
             className="text-3xl font-bold mb-20"
           >
-            <span className="text-red-600 font-mono text-xl">02.</span>{" "}
-            Habilidades Técnicas
+            <span className="text-red-600 font-mono text-xl">{ui.skills.sectionNum}</span>{" "}
+            {ui.skills.title}
           </motion.h2>
 
           <motion.div
@@ -193,13 +252,8 @@ export default function Home() {
                   whileHover={{ y: -12 }}
                   className="group relative p-10 rounded-[2.5rem] bg-neutral-900 border border-neutral-800 hover:border-red-600/40 transition-colors duration-300 overflow-hidden"
                 >
-                  {/* Blob de luz que reage ao hover */}
                   <div className="absolute -right-10 -top-10 w-40 h-40 bg-red-600/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                  {/* Barra lateral que "acende" */}
                   <div className="absolute left-0 top-0 h-full w-1 bg-red-600 scale-y-0 group-hover:scale-y-100 origin-top transition-transform duration-500" />
-
-                  {/* Número de índice fantasma */}
                   <span className="absolute right-6 top-6 text-6xl font-black text-neutral-800/30 group-hover:text-red-600/10 transition-colors duration-500 select-none">
                     {String(idx + 1).padStart(2, "0")}
                   </span>
@@ -260,18 +314,18 @@ export default function Home() {
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
               <div>
                 <h2 className="text-3xl font-bold mb-4">
-                  <span className="text-red-600 font-mono text-xl">03.</span>{" "}
-                  Certificações & Conquistas
+                  <span className="text-red-600 font-mono text-xl">{ui.certs.sectionNum}</span>{" "}
+                  {ui.certs.title}
                 </h2>
                 <p className="text-neutral-500 max-w-xl">
-                  Um resumo do que já estudei e validei ao longo do caminho.
+                  {ui.certs.subtitle}
                 </p>
               </div>
               <Link
                 href="/certificacoes"
                 className="flex items-center gap-2 text-sm font-bold text-red-500 hover:text-white transition-colors shrink-0 group"
               >
-                Ver todas as certificações
+                {ui.certs.viewAll}
                 <ArrowRight
                   size={16}
                   className="group-hover:translate-x-1 transition-transform"
@@ -360,13 +414,11 @@ export default function Home() {
         >
           <div className="flex justify-between items-end mb-20">
             <h2 className="text-3xl font-bold">
-              <span className="text-red-600 font-mono text-xl">04.</span> Tudo o
-              que já construí
+              <span className="text-red-600 font-mono text-xl">{ui.projects.sectionNum}</span> {ui.projects.title}
             </h2>
           </div>
 
           <div className="space-y-32">
-            {/* O limitador de projetos foi aplicado utilizando a função .slice(0, 4) */}
             {projects.slice(0, 4).map((project, idx) => (
               <motion.div
                 key={project.id}
@@ -377,11 +429,12 @@ export default function Home() {
                 className={`flex flex-col ${idx % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} gap-12 items-center group`}
               >
                 <div className="w-full md:w-1/2 relative aspect-video rounded-3xl overflow-hidden border border-neutral-800 shadow-2xl">
-                  {/* Badge de Em Desenvolvimento */}
-                  {project.status === "Em Desenvolvimento" && (
+
+                  {/* Badge de Em Desenvolvimento / In Development */}
+                  {(project.status === "Em Desenvolvimento" || project.status === "In Development") && (
                     <div className="absolute top-4 left-4 z-20">
                       <span className="bg-red-950/80 backdrop-blur-md border border-red-800 text-red-400 text-[10px] font-mono uppercase tracking-widest px-3 py-1.5 rounded-lg">
-                        Em Desenvolvimento
+                        {ui.projects.devBadge}
                       </span>
                     </div>
                   )}
@@ -412,7 +465,7 @@ export default function Home() {
                       href={`/projetos/${project.id}`}
                       className="flex items-center gap-2 px-6 py-3 bg-neutral-900 hover:bg-red-600 text-white text-sm rounded-full transition-all font-bold tracking-wider hover:scale-105"
                     >
-                      VER DETALHES <ExternalLink size={16} />
+                      {ui.projects.detailsBtn} <ExternalLink size={16} />
                     </Link>
                   </div>
                 </div>
@@ -433,7 +486,7 @@ export default function Home() {
                 href="/projetos"
                 className="group flex items-center gap-3 px-8 py-4 bg-neutral-900 border border-neutral-800 hover:border-red-600 hover:bg-red-600/10 text-white rounded-full font-bold transition-all hover:scale-105"
               >
-                VER TODOS OS PROJETOS <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                {ui.projects.viewAllBtn} <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
           )}
@@ -451,24 +504,24 @@ export default function Home() {
             variants={fadeUp}
           >
             <h2 className="text-5xl font-bold mb-8 tracking-tighter">
-              Vamos construir algo{" "}
-              <span className="text-red-600 underline">juntos?</span>
+              {ui.contact.title1}{" "}
+              <span className="text-red-600 underline">{ui.contact.titleHighlight}</span>
             </h2>
             <p className="text-neutral-400 text-xl mb-12">
-              Estou disponível para novos projetos e colaborações.
+              {ui.contact.subtitle}
             </p>
             <a
               href="https://wa.me/5522997793222"
               className="inline-block bg-white text-black px-12 py-5 rounded-full font-black hover:bg-red-600 hover:text-white transition-all transform hover:-translate-y-2"
             >
-              ENTRAR EM CONTATO
+              {ui.contact.cta}
             </a>
           </motion.div>
         </section>
       </main>
 
       <footer className="py-10 border-t border-neutral-900 text-center text-neutral-600 font-mono text-xs uppercase tracking-[0.3em]">
-        © {new Date().getFullYear()} Lucas Lira • Developed with Next.js
+        © {new Date().getFullYear()} Lucas Lira • {ui.footer}
       </footer>
     </div>
   );
