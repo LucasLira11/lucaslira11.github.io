@@ -1,25 +1,21 @@
-// src/app/layout.tsx
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { siteUrl } from "@/data/profile";
+import { ui } from "@/data/ui";
+import { inter } from "@/lib/fonts";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
-  title: "Lucas Lira | Desenvolvedor Full-Stack",
-  description: "Portfólio de Lucas Lira, Desenvolvedor Web focado em criar experiências digitais modernas com Next.js, React e Spring Boot.",
+  metadataBase: new URL(siteUrl),
+  title: { default: ui.pt.meta.homeTitle, template: "%s · Lucas Lira" },
+  description: ui.pt.meta.homeDescription,
+  authors: [{ name: "Lucas Pontes Lira", url: siteUrl }],
+  creator: "Lucas Pontes Lira",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className="scroll-smooth">
-      <body className={`${inter.className} bg-neutral-950 text-white antialiased`}>
-        {children}
-      </body>
+    <html lang="pt-BR" className={inter.variable}>
+      <body>{children}</body>
     </html>
   );
 }

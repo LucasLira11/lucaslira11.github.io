@@ -40,7 +40,7 @@ export default function MobileMenu({ items, openLabel, closeLabel, navLabel }: {
         id={panelId}
         aria-label={navLabel}
         hidden={!open}
-        className="absolute inset-x-0 top-full border-b border-line bg-bg/95 backdrop-blur-md"
+        className="absolute inset-x-0 top-full border-b border-line bg-bg shadow-2xl shadow-black/60"
       >
         <ul className="container-page flex flex-col py-3">
           {items.map((item) => (
