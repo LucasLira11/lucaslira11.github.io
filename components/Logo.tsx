@@ -1,15 +1,12 @@
-// src/components/Logo.tsx
-export default function Logo() {
+import Link from "next/link";
+
+export default function Logo({ href = "/", label = "Lucas Lira, página inicial" }: { href?: string; label?: string }) {
   return (
-    <div className="flex items-center gap-1 font-sans group cursor-pointer">
-      {/* "Lucas" em Branco/Cinza claro */}
-      <span className="text-2xl font-bold text-white tracking-tighter transition-colors group-hover:text-neutral-300">
-        Lucas
-      </span>
-      {/* "</>" em Vermelho */}
-      <span className="text-2xl font-black text-red-600 tracking-tighter">
+    <Link href={href} aria-label={label} className="group inline-flex min-h-11 items-center gap-1 rounded-md text-2xl font-bold tracking-tighter">
+      <span className="text-fg transition-colors group-hover:text-fg-muted">Lucas</span>
+      <span aria-hidden="true" className="font-black text-accent">
         &lt;/&gt;
       </span>
-    </div>
+    </Link>
   );
 }
