@@ -1,18 +1,32 @@
-import ClientPage from './ClientPage';
-import { portfolioData } from '@/data/portfolioData';
+import { notFound } from "next/navigation";
+import ProjectDetailPage from "@/components/pages/ProjectDetailPage";
+import { getProject, projects } from "@/data/projects";
+import { projectPath, t } from "@/lib/i18n";
+import { pageMetadata } from "@/lib/seo";
 
-// 1. Esta função diz ao Next.js quais URLs gerar na hora do build
+// Export estático: só existem as páginas listadas aqui
+export const dynamicParams = false;
+
 export function generateStaticParams() {
-  // Como os IDs são os mesmos nas duas línguas, podemos pegar da lista em 'pt'
-  return portfolioData.pt.projects.map((project) => ({
-    id: project.id,
-  }));
+  return projects.map((p) => ({ id: p.id }));
 }
 
-// 2. O Componente da página em si
-export default async function Page({ params }: { params: Promise<{ id: string }> }) {
-  // No Next.js mais recente, o params é uma Promise, então precisamos extrair o ID com o await
+export async function generateMetadata({ params }: PageProps<"/projetos/[id]">) {
   const { id } = await params;
-  
-  return <ClientPage id={id} />;
+  const project = getProject(id);
+  if (!project) return {};
+  return pageMetadata({
+    locale: "pt",
+    title: t(project.title, "pt"),
+    description: t(project.summary, "pt"),
+    paths: { pt: projectPath(id, "pt"), en: projectPath(id, "en") },
+    type: "article",
+  });
+}
+
+export default async function Page({ params }: PageProps<"/projetos/[id]">) {
+  const { id } = await params;
+  const project = getProject(id);
+  if (!project) notFound();
+  return <ProjectDetailPage project={project} locale="pt" />;
 }
