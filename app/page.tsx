@@ -199,7 +199,7 @@ export default function Home() {
               <div className="absolute inset-0 border-2 border-red-600 rounded-3xl translate-x-4 md:translate-x-10 translate-y-4 transition-transform duration-500 w-full h-full max-w-[280px]"></div>
               <div className="relative aspect-square bg-neutral-900 rounded-3xl overflow-hidden border border-neutral-800 w-full max-w-[280px]">
                 <Image
-                  src="/fotoperfil.png"
+                  src="/images/profile.webp"
                   alt="Lucas"
                   fill
                   className="object-cover object-top grayscale-0 group-hover:grayscale transition-all duration-700"
