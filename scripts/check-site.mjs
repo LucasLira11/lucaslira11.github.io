@@ -4,7 +4,7 @@
 // Falha (exit 1) se encontrar:
 // - link interno ou asset que não resolve para um arquivo em out/
 // - página sem lang, title, description, canonical ou og:image
-// - title repetido entre páginas
+// - title repetido entre páginas do mesmo idioma
 // - sitemap.xml ausente, ou URL do sitemap que não existe no build
 // - robots.txt sem a linha Sitemap
 // Com --external, também testa os links externos (rede).
@@ -70,7 +70,8 @@ for (const file of htmlFiles) {
     if (!/<meta name="description" content="[^"]+"/.test(html)) fail(`${page}: sem meta description`);
     if (!/<link rel="canonical" href="[^"]+"/.test(html)) fail(`${page}: sem canonical`);
     if (!/<meta property="og:image" content="[^"]+"/.test(html)) fail(`${page}: sem og:image`);
-    if (title) titles.set(title, [...(titles.get(title) ?? []), page]);
+    // Nomes próprios (ex.: "BusAI") podem repetir entre PT e EN; a checagem é por idioma
+    if (title) titles.set(`${lang} | ${title}`, [...(titles.get(`${lang} | ${title}`) ?? []), page]);
   }
 
   // Links e assets

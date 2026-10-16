@@ -2,10 +2,22 @@ import type { Metadata } from "next";
 import { profile, siteUrl } from "@/data/profile";
 import { publications } from "@/data/publications";
 import { skillGroups } from "@/data/skills";
+import { ui } from "@/data/ui";
 import { htmlLang, ogLocale, otherLocale, t } from "@/lib/i18n";
 import type { Locale, Localized, Publication } from "@/types/content";
 
 const ogImage = { url: "/og.png", width: 1200, height: 630, alt: "Lucas Lira · Full Stack" };
+
+/** Metadados comuns a todas as páginas de um idioma (usados nos root layouts). */
+export function rootMetadata(locale: Locale): Metadata {
+  return {
+    metadataBase: new URL(siteUrl),
+    title: { default: ui[locale].meta.homeTitle, template: "%s · Lucas Lira" },
+    description: ui[locale].meta.homeDescription,
+    authors: [{ name: profile.fullName, url: siteUrl }],
+    creator: profile.fullName,
+  };
+}
 
 /**
  * Metadados de uma página: title, description, canonical, hreflang,

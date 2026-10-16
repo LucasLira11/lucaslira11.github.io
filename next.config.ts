@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  experimental: {
+    // O site tem dois root layouts (pt e en); a 404 global (app/global-not-found.tsx)
+    // é o jeito de ter uma página 404 própria nesse caso
+    globalNotFound: true,
+  },
 };
 
 export default nextConfig;
