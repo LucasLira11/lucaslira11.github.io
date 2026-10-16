@@ -46,7 +46,7 @@ export default function CertificationsExplorer({
               className="inline-flex min-h-11 items-center gap-2 rounded-full border border-line bg-surface px-4 text-sm font-medium text-fg-muted transition-colors hover:border-line-strong hover:text-fg aria-pressed:border-accent-strong aria-pressed:bg-accent-strong aria-pressed:text-white"
             >
               {f.label}
-              <span className="font-mono text-xs opacity-80">{f.count}</span>
+              <span className="font-mono text-xs">{f.count}</span>
             </button>
           ))}
         </div>

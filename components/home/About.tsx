@@ -23,12 +23,12 @@ export default function About({ locale }: { locale: Locale }) {
         </div>
         <dl className="reveal space-y-4 self-start rounded-2xl border border-line bg-surface p-6">
           {facts.map(({ Icon, label, value }) => (
-            <div key={label} className="flex gap-3">
-              <Icon size={20} aria-hidden="true" className="mt-0.5 shrink-0 text-accent" />
-              <div>
-                <dt className="font-mono text-xs uppercase tracking-wider text-fg-subtle">{label}</dt>
-                <dd className="mt-1 text-fg">{value}</dd>
-              </div>
+            <div key={label}>
+              <dt className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-fg-subtle">
+                <Icon size={18} aria-hidden="true" className="shrink-0 text-accent" />
+                {label}
+              </dt>
+              <dd className="mt-1 pl-[26px] text-fg">{value}</dd>
             </div>
           ))}
         </dl>

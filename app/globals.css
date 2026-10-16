@@ -28,13 +28,12 @@
   --animate-reveal: reveal linear both;
 }
 
+/* Só movimento, sem fade: texto parcialmente visível nunca fica com contraste baixo */
 @keyframes reveal {
   from {
-    opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(32px);
   }
   to {
-    opacity: 1;
     transform: none;
   }
 }
