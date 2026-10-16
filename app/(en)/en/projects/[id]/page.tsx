@@ -4,6 +4,8 @@ import { getProject, projects } from "@/data/projects";
 import { projectPath, t } from "@/lib/i18n";
 import { pageMetadata } from "@/lib/seo";
 
+type Props = { params: Promise<{ id: string }> };
+
 // Static export: only the pages listed here exist
 export const dynamicParams = false;
 
@@ -11,7 +13,7 @@ export function generateStaticParams() {
   return projects.map((p) => ({ id: p.id }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/en/projects/[id]">) {
+export async function generateMetadata({ params }: Props) {
   const { id } = await params;
   const project = getProject(id);
   if (!project) return {};
@@ -24,7 +26,7 @@ export async function generateMetadata({ params }: PageProps<"/en/projects/[id]"
   });
 }
 
-export default async function Page({ params }: PageProps<"/en/projects/[id]">) {
+export default async function Page({ params }: Props) {
   const { id } = await params;
   const project = getProject(id);
   if (!project) notFound();
