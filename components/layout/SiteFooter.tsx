@@ -67,7 +67,7 @@ export default function SiteFooter({ locale, page }: { locale: Locale; page: Pag
           <p>
             © {new Date().getFullYear()} {profile.fullName}. {footer.rights}
           </p>
-          <a href={siteRepo} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center underline-offset-4 hover:text-fg hover:underline sm:min-h-0">
+          <a href={siteRepo} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center underline-offset-4 hover:text-fg hover:underline">
             {footer.source}
             <span className="sr-only"> {project.opensInNewTab}</span>
           </a>
